@@ -57,7 +57,9 @@ fun customCreationLocalDateTimeWithSeconds() {
     // 2023-08-31T12:30:20
 }
 
-infix fun LocalDateTime.and(duration: kotlin.time.Duration): LocalDateTime = this.plus(duration.toJavaDuration())
+infix fun LocalDateTime.and(duration: kotlin.time.Duration): LocalDateTime {
+    return this.plus(duration.toJavaDuration())
+}
 
 
 fun main() {
