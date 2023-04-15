@@ -74,6 +74,7 @@ operator fun LocalDateTime.component5(): Int = this.minute
 operator fun LocalDateTime.component6(): Int = this.second
 operator fun LocalDateTime.component7(): Int = this.nano
 
+
 fun main() {
     gettingPropertiesFromLocalDate()
     destructuringPoint3D()
