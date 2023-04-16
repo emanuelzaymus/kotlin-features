@@ -11,8 +11,8 @@ Showcase of uncommon usage of typical Kotlin features.
 - // Arithmetics for +/- LocalDateTime: `date - 14.minutes + 50.seconds`
 - // fromDate..toDate operator (for-loop, then with List(5) { i -> }); fromDate downTo toDate step 2
 - // comparison of localDates
-- dateTime in date operator
-- Random.nextLocalDate(from = MIN, to = MAX) -> random in dateRange
+- // dateTime in date operator
+- // Random.nextLocalDate(from = MIN, to = MAX) -> random in dateRange
 
 **Type-safe builders**
 
