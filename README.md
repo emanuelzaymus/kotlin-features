@@ -6,10 +6,11 @@ Showcase of uncommon usage of typical Kotlin features.
 
 **LocalDate/LocalDateTime**
 
-- LocalDate/LocalDateTime -> extension functions for destructuring declaration
-- Simple DSL for creating of LocalDate and LocalDateTime: `17 January 2024 at 13:40`
-- Arithmetics for +/- LocalDateTime: `date - 14.minutes + 50.seconds`
-- fromDate..toDate operator (for-loop, then with List(5) { i -> }); fromDate downTo toDate step 2
+- // LocalDate/LocalDateTime -> extension functions for destructuring declaration
+- // Simple DSL for creating of LocalDate and LocalDateTime: `17 January 2024 at 13:40`
+- // Arithmetics for +/- LocalDateTime: `date - 14.minutes + 50.seconds`
+- // fromDate..toDate operator (for-loop, then with List(5) { i -> }); fromDate downTo toDate step 2
+- // comparison of localDates
 - dateTime in date operator
 - Random.nextLocalDate(from = MIN, to = MAX) -> random in dateRange
 
