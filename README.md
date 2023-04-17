@@ -14,12 +14,12 @@ Showcase of uncommon usage of typical Kotlin features.
 - // dateTime in date operator
 - // Random.nextLocalDate(from = MIN, to = MAX) -> random in dateRange
 
-**Type-safe builders**
+**// Type-safe builders**
 
-- by lazy { heavyCompute() }
-- val sql by SimpleSql.select("*").from("user").where("id > 1000")
-- by getValue ... -> by EmailAddress("zly", "pes", "prosoft.sk")
-    - zly.pes@prosoft.sk
+- // by lazy { heavyCompute() }
+- // val sql by SimpleSql.select("*").from("user").where("id > 1000")
+- // by getValue ... -> by EmailAddress("zly", "pes", "prosoft.sk")
+    - // zly.pes@prosoft.sk
 
 **Enhanced Extension Properties**
 
