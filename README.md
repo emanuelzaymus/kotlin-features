@@ -2,25 +2,22 @@
 
 Showcase of uncommon usage of typical Kotlin features.
 
-### TODO:
+### LocalDate / LocalDateTime
 
-**LocalDate/LocalDateTime**
+- Extension functions for destructuring declaration
+- Simple DSL for creating of LocalDate and LocalDateTime: `17 January 2024 at 13:40 and 50.seconds`
+- Arithmetics for LocalDateTime: `dateTime - 14.minutes + 50.seconds`
+- LocalDate range: `fromDate..toDate`, `fromDate unitl toDate`, `fromDate downTo toDate step 2`
+- Comparison of LocalDates: > < >= <= == != === !==
+- LocalDateTime `in` LocalDate
+- `fun Random.Default.nextLocalDate(from = LocalDate.MIN, to = LocalDate.MAX): LocalDate`
 
-- // LocalDate/LocalDateTime -> extension functions for destructuring declaration
-- // Simple DSL for creating of LocalDate and LocalDateTime: `17 January 2024 at 13:40`
-- // Arithmetics for +/- LocalDateTime: `date - 14.minutes + 50.seconds`
-- // fromDate..toDate operator (for-loop, then with List(5) { i -> }); fromDate downTo toDate step 2
-- // comparison of localDates
-- // dateTime in date operator
-- // Random.nextLocalDate(from = MIN, to = MAX) -> random in dateRange
+### Delegation
 
-**// Type-safe builders**
+- Lazy function `by lazy { heavyCompute() }`
+- Example for implementing `by EmailAddress()`
+- QueryBuilder example
 
-- // by lazy { heavyCompute() }
-- // val sql by SimpleSql.select("*").from("user").where("id > 1000")
-- // by getValue ... -> by EmailAddress("zly", "pes", "prosoft.sk")
-    - // zly.pes@prosoft.sk
+### Enhanced Extension Properties
 
-**Enhanced Extension Properties**
-
-- WeakReferenceHashMap -> Extensions properties
+- Extensions properties using WeakHashMap for storing data
