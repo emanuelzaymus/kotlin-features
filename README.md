@@ -14,7 +14,7 @@ Showcase of uncommon usage of typical Kotlin features.
 
 ### Delegation
 
-- Lazy function `by lazy { heavyCompute() }`
+- Lazy function `by lazy { }`
 - Example for implementing `by EmailAddress()`
 - QueryBuilder example
 
