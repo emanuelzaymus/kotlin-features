@@ -29,8 +29,12 @@ fun customCreationLocalDate() {
     // 2023-01-08
 }
 
+// region Extensions
+
 infix fun Int.January(year: Int): LocalDate = LocalDate.of(year, Month.JANUARY, this)
 infix fun Int.August(year: Int): LocalDate = LocalDate.of(year, Month.AUGUST, this)
+
+// endregion
 
 fun creationOfLocalDateTime() {
     val dateTime = LocalDateTime.of(2023, 8, 31, 12, 30)
