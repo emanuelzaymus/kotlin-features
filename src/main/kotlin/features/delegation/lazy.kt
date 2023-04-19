@@ -14,9 +14,9 @@ fun lazyAssignment() {
         result
     }
 
-    println("GET MILLIONTH PRIME:")
+    println("GET MILLIONTH PRIME")
     println(millionthPrime)
-    // GET MILLIONTH PRIME:
+    // GET MILLIONTH PRIME
     // Calculation started...
     // Calculation finished.
     // 15485863

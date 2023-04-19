@@ -21,6 +21,22 @@ fun classicSqlBuilder() {
     // SELECT id, full_name, email FROM users WHERE id > 4
 }
 
+interface QueryStatementBuilder {
+    fun build(): String
+}
+
+fun delegatedSqlBuilder() {
+    val query: String by QueryBuilder
+        .select(ID, FULL_NAME, EMAIL)
+        .from(USERS)
+        .where("$ID > 4")
+
+    println(query)
+}
+
+operator fun QueryStatementBuilder.getValue(thisRef: Any?, property: KProperty<*>): String = this.build()
+
+
 object QueryBuilder {
     fun select(vararg columns: String) = SelectStatementBuilder(columns)
 }
@@ -43,20 +59,6 @@ class WhereStatementBuilder(
     private val condition: String,
 ) : QueryStatementBuilder {
     override fun build(): String = fromStatementBuilder.build() + " WHERE $condition"
-}
-
-interface QueryStatementBuilder {
-    fun build(): String
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): String = build()
-}
-
-fun delegatedSqlBuilder() {
-    val query: String by QueryBuilder
-        .select(ID, FULL_NAME, EMAIL)
-        .from(USERS)
-        .where("$ID > 4")
-
-    println(query)
 }
 
 
