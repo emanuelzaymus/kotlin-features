@@ -63,7 +63,7 @@ class EmailDelegate(private var value: String? = null) {
 
     operator fun setValue(thisRef: Any?, property: KProperty<*>, newValue: String?) {
         println("$thisRef is setting delegate '${property.name}' with: $newValue")
-        value = newValue
+        value = newValue?.lowercase()
     }
 
 }
@@ -79,8 +79,8 @@ fun emailDelegate() {
     // null is setting delegate 'delegatedEmail' with: VladiKt.HanusniaKt@prosoft.sk
 
     println(delegatedEmail)
-    // null is getting delegate 'delegatedEmail': VladiKt.HanusniaKt@prosoft.sk
-    // VladiKt.HanusniaKt@prosoft.sk
+    // null is getting delegate 'delegatedEmail': vladikt.hanusniakt@prosoft.sk
+    // vladikt.hanusniakt@prosoft.sk
 }
 
 class User(private val name: String) {
