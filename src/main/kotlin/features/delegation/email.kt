@@ -4,37 +4,37 @@ import kotlin.reflect.KProperty
 
 private var email: String? = null
     get() {
-        println("Somebody is getting 'email' variable: $field")
+        println("Somebody is getting variable 'email': $field")
         return field
     }
     set(value) {
-        println("Somebody is setting 'email' variable with: $value")
-        field = value
+        println("Somebody is setting variable 'email' with: $value")
+        field = value?.lowercase()
     }
 
 fun emailVariable() {
-    println("Email is: $email")
-    // Somebody is getting 'email' variable: null
-    // Email is: null
+    println(email)
+    // Somebody is getting variable 'email': null
+    // null
 
-    email = "janko.fric@prosoft.sk"
-    // Somebody is setting 'email' variable with: janko.fric@prosoft.sk
+    email = "Peto.MargetiaKt@prosoft.sk"
+    // Somebody is setting variable 'email' with: Peto.MargetiaKt@prosoft.sk
 
-    println("Email after change is: $email")
-    // Somebody is getting 'email': janko.fric@prosoft.sk
-    // Email after change is: janko.fric@prosoft.sk
+    println(email)
+    // Somebody is getting variable 'email': peto.margetiakt@prosoft.sk
+    // peto.margetiakt@prosoft.sk
 }
 
-class Email(email: String = "<empty-email>") {
+class Email(email: String? = null) {
 
-    var value: String = email
-        get(): String {
-            println("Somebody is getting 'Email' class: $field")
+    var value: String? = email
+        get(): String? {
+            println("Somebody is getting class 'Email': $field")
             return field
         }
         set(newValue) {
-            println("Somebody is setting 'Email' class with: $newValue")
-            field = newValue
+            println("Somebody is setting class 'Email' with: $newValue")
+            field = newValue?.lowercase()
         }
 
 }
@@ -42,50 +42,50 @@ class Email(email: String = "<empty-email>") {
 fun emailClass() {
     val email = Email()
 
-    println("Email class is: ${email.value}")
-    // Somebody is getting 'Email' class: <empty-email>
-    // Email class is: <empty-email>
+    println(email.value)
+    // Somebody is getting class 'Email': null
+    // null
 
-    email.value = "fric.janko@prosoft.sk"
-    // Somebody is setting 'Email' class with: fric.janko@prosoft.sk
+    email.value = "Miso.JostiaKt@sybrisoft.sk"
+    // Somebody is setting class 'Email' with: Miso.JostiaKt@sybrisoft.sk
 
-    println("Email class after change is: ${email.value}")
-    // Somebody is getting 'Email' class: fric.janko@prosoft.sk
-    // Email class after change is: fric.janko@prosoft.sk
+    println(email.value)
+    // Somebody is getting class 'Email': miso.jostiakt@sybrisoft.sk
+    // miso.jostiakt@sybrisoft.sk
 }
 
-class EmailDelegate(email: String = "<empty-email>") {
-    private var value: String = email
-    operator fun getValue(thisRef: Any?, property: KProperty<*>): String {
-        println("$thisRef is getting '${property.name}' delegate: $value")
+class EmailDelegate(private var value: String? = null) {
+
+    operator fun getValue(thisRef: Any?, property: KProperty<*>): String? {
+        println("$thisRef is getting delegate '${property.name}': $value")
         return value
     }
 
-    operator fun setValue(thisRef: Any?, property: KProperty<*>, newValue: String) {
-        println("$thisRef is setting '${property.name}' delegate with: $newValue")
+    operator fun setValue(thisRef: Any?, property: KProperty<*>, newValue: String?) {
+        println("$thisRef is setting delegate '${property.name}' with: $newValue")
         value = newValue
     }
 
 }
 
 fun emailDelegate() {
-    var delegatedEmail: String by EmailDelegate()
+    var delegatedEmail: String? by EmailDelegate()
 
-    println("Delegated email: $delegatedEmail")
-    // null is getting 'delegatedEmail' delegate: <empty-email>
-    // Delegated email: <empty-email>
+    println(delegatedEmail)
+    // null is getting delegate 'delegatedEmail': null
+    // null
 
-    delegatedEmail = "zly.pes@prosoft.sk"
-    // null is setting 'delegatedEmail' delegate with: zly.pes@prosoft.sk
+    delegatedEmail = "VladiKt.HanusniaKt@prosoft.sk"
+    // null is setting delegate 'delegatedEmail' with: VladiKt.HanusniaKt@prosoft.sk
 
-    println("Delegated email after change: $delegatedEmail")
-    // null is getting 'delegatedEmail' delegate: zly.pes@prosoft.sk
-    // Delegated email after change: zly.pes@prosoft.sk
+    println(delegatedEmail)
+    // null is getting delegate 'delegatedEmail': VladiKt.HanusniaKt@prosoft.sk
+    // VladiKt.HanusniaKt@prosoft.sk
 }
 
 class User(private val name: String) {
 
-    var userEmail: String by EmailDelegate()
+    var userEmail: String? by EmailDelegate()
 
     override fun toString(): String = name
 
@@ -94,17 +94,18 @@ class User(private val name: String) {
 fun emailDelegateInClass() {
     val user = User("Psisko")
 
-    println("User's email: ${user.userEmail}")
-    // Psisko is getting 'userEmail' delegate: <empty-email>
-    // User's email: <empty-email>
+    println(user.userEmail)
+    // Psisko is getting delegate 'userEmail': null
+    // null
 
-    user.userEmail = "zly.pes@prosoft.sk"
-    // Psisko is setting 'userEmail' delegate with: zly.pes@prosoft.sk
+    user.userEmail = "zly.pes@prosoft.kt"
+    // Psisko is setting delegate 'userEmail' with: zly.pes@prosoft.kt
 
-    println("User's email after change: ${user.userEmail}")
-    // Psisko is getting 'userEmail' delegate: zly.pes@prosoft.sk
-    // User's email after change: zly.pes@prosoft.sk
+    println(user.userEmail)
+    // Psisko is getting delegate 'userEmail': zly.pes@prosoft.kt
+    // zly.pes@prosoft.kt
 }
+
 
 fun main() {
     emailVariable()

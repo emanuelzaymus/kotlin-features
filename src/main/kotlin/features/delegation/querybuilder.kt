@@ -32,6 +32,7 @@ fun delegatedSqlBuilder() {
         .where("$ID > 4")
 
     println(query)
+    // SELECT id, full_name, email FROM users WHERE id > 4
 }
 
 operator fun QueryStatementBuilder.getValue(thisRef: Any?, property: KProperty<*>): String = this.build()
