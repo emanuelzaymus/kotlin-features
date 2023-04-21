@@ -22,7 +22,7 @@ private val user: Person = User(1, "Janko", "Fric")
 
 fun userWithClassicExtension() {
     println(user)
-    // User: ProUser(id=1, firstName=Janko, lastName=Fric)
+    // User(id=1, firstName=Janko, lastName=Fric)
 
     println("Initials: ${user.initials}")
     // Initials: J.F.
