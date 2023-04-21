@@ -1,3 +1,5 @@
+@file:Suppress("GrazieInspection")
+
 package features.delegation
 
 import kotlin.reflect.KProperty
