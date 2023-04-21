@@ -97,7 +97,7 @@ class User(private val name: String) {
 
 //class User(private val name: String) {
 //
-//    private var userEmail$delegate: String? = EmailDelegate()
+//    private var userEmail$delegate = EmailDelegate()
 //    var userEmail: String?
 //        get() = userEmail$delegate.getValue(this, this::userEmail)
 //        set(value: String?) = userEmail$delegate.setValue(this, this::userEmail, value)
