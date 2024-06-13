@@ -81,6 +81,14 @@ fun windowed() {
     // [[1, 2, 3], [3, 4, 5], [5]]
 }
 
+fun partition() {
+    val list = listOf(1, 2, 3, 4, 5)
+
+    val (even, odd) = list.partition { it % 2 == 0 }
+    println(even) // [2, 4]
+    println(odd)  // [1, 3, 5]
+}
+
 fun joinToString() {
     val list = listOf(1, 2, 3, 4, 5)
 
@@ -191,6 +199,14 @@ fun fold() {
     // true
 }
 
+fun scan() {
+    val list = listOf(1, 2, 3, 4, 5)
+
+    val scan: List<Double> = list.scan(1.0, Double::times) // runningFold
+    println(scan)
+    // [1.0, 1.0, 2.0, 6.0, 24.0, 120.0]
+}
+
 fun operations() {
     val listA = listOf(3, 1, 2, 3, 4, 5)
     val listB = listOf(3, 4, 5, 6, 7)
@@ -229,14 +245,12 @@ fun operations() {
     val difference: Set<Int> = listA difference listB
     println(difference)
     // [1, 2, 6, 7]
-
-//    setOf(1, 2, 3).partition(setOf(3, 4, 5))
-//    setOf(1, 2, 3).scan() partition(setOf(3, 4, 5))
 }
 
 infix fun <T> Iterable<T>.difference(other: Iterable<T>): Set<T> {
     val leftOnly = this subtract other.toSet()
     val rightOnly = other subtract this.toSet()
+
     return leftOnly union rightOnly
 }
 
@@ -284,11 +298,13 @@ fun main() {
     groupBy()
     chunked()
     windowed()
+    partition()
     joinToString()
     joinTo()
     zip()
     reduce()
     fold()
+    scan()
     operations()
     utilities()
 }
