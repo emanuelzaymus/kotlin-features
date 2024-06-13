@@ -1,5 +1,7 @@
 package features.stdlib
 
+import kotlin.math.pow
+
 fun slice() {
     val list = listOf('a', 'b', 'c', 'd', 'e')
 
@@ -29,6 +31,30 @@ fun associate() {
     val map3 = list.associateWith { it.length }
     println(map3)
     //{Kotlin=6, Java=4, Scala=5, Groovy=6}
+}
+
+fun groupBy() {
+    val list = listOf("Kotlin", "Java", "Scala", "Groovy")
+
+    val map: Map<Int, List<String>> = list.groupBy { it.length }
+    println(map)
+    // {6=[Kotlin, Groovy], 4=[Java], 5=[Scala]}
+
+    val counts = list.groupingBy { it.length }.eachCount()
+    println(counts)
+    // {6=2, 4=1, 5=1}
+
+    val aggregate = list
+        .groupingBy { it.length }
+        .aggregate { key: Int, accumulator: String?, element: String, first: Boolean ->
+            val acc =
+                if (first) "With length $key is "
+                else "$accumulator and "
+            acc + element.uppercase()
+        }
+
+    println(aggregate.values)
+    // [With length 6 is KOTLIN and GROOVY, With length 4 is JAVA, With length 5 is SCALA]
 }
 
 fun chunked() {
@@ -114,22 +140,57 @@ fun zip() {
     // [(1, 2), (2, 3), (3, 4), (4, 5)]
 }
 
-// reduce
-fun a() {
+fun reduce() {
     val list = listOf(1, 2, 3, 4, 5)
 
-    val sum = list.reduce { acc, i -> acc + i }
-    println(sum)
-    // 15
+    val product: Int = list.reduce { acc, num -> acc * num }
+    println(product)
+    // 120
 
-    val sum2 = list.reduceIndexed { index, acc, i -> acc + i * index }
-    println(sum2)
-    // 41
+    val product2 = list.reduce(Int::times)
+    println(product == product2)
+    // true
+
+    val runningReduce: List<Int> = list.runningReduce(Int::times)
+    println(runningReduce)
+    // [1, 2, 6, 24, 120]
+
+    val emptyList = listOf<Int>()
+    try {
+        emptyList.reduce(Int::times)
+    } catch (_: UnsupportedOperationException) {
+    } // UnsupportedOperationException: Empty collection can't be reduced.
 }
 
-// fold
+fun fold() {
+    val list = listOf<Int>()
 
-// groupBy
+    val foldInt: Int = list.fold(1, Int::times)
+    println(foldInt)
+    // 1
+
+    val foldDouble: Double = list.fold(1.0, Double::times)
+    println(foldDouble)
+    // 1.0
+
+    val list2 = listOf("5", "8", "3", "9", "4")
+
+    // 5^1 + 8^2 + 3^3 + 9^4 + 4^5
+    val sumOfPowers = list2.foldIndexed(0.0) { index: Int, acc: Double, str: String ->
+        acc + str.toDouble().pow(index + 1)
+    }
+    println(sumOfPowers)
+    // 7681.0
+
+    val sumOfPowers2 = list2.asSequence()
+        .map { it.toDouble() }
+        .mapIndexed { index, num -> num.pow(index + 1) }
+        .sum()
+
+    println(sumOfPowers == sumOfPowers2)
+    // true
+}
+
 
 // + - union intersect subtract
 
@@ -211,11 +272,13 @@ fun other() {
 fun main() {
     slice()
     associate()
+    groupBy()
     chunked()
     windowed()
     joinToString()
     joinTo()
     zip()
-    a()
+    reduce()
+    fold()
     other()
 }
