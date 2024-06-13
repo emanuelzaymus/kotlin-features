@@ -191,83 +191,92 @@ fun fold() {
     // true
 }
 
+fun operations() {
+    val listA = listOf(3, 1, 2, 3, 4, 5)
+    val listB = listOf(3, 4, 5, 6, 7)
 
-// + - union intersect subtract
+    val aPlusB: List<Int> = listA + listB
+    println(aPlusB)
+    // [1, 2, 3, 4, 5, 3, 4, 5, 6, 7]
 
-// asSequence
+
+    val aMinusB: List<Int> = listA - listB
+    println(aMinusB)
+    // [1, 2]
+
+    val bMinusA: List<Int> = listB - listA
+    println(bMinusA)
+    // [6, 7]
 
 
-// utility functions
+    val aSubtractB: Set<Int> = listA subtract listB
+    println(aSubtractB)
+    // [1, 2]
 
-// repeat(5) {}, measureTime {}, check, require, error
+    val bSubtractA: Set<Int> = listB subtract listA
+    println(bSubtractA)
+    // [6, 7]
 
-// runCatching{}
 
-//fun utilities() {
-//    val list = listOf(null, "b", "C", null, "EF", "g", null)
-//
-//    list.first() // can throw NoSuchElementException
-//    list.first { it?.length == 2 }
-//
-//    list.firstOrNull()
-//    list.firstOrNull { it?.length == 3 }
-//
-//    val s: String = list.firstNotNullOf { it?.uppercase() }
-//
-//    list.firstNotNullOf { it ?: "C" }
-//}
+    val union: Set<Int> = listA union listB
+    println(union)
+    // [1, 2, 3, 4, 5, 6, 7]
 
-fun other() {
-    val list = listOf(1, 2, 3, 4, 5)
+    val intersect: Set<Int> = listA intersect listB
+    println(intersect)
+    // [3, 4, 5]
 
-    list.first()
-    list.last()
-    list.firstOrNull()
-    list.lastOrNull()
-    list.single()
-    list.singleOrNull()
-    list.elementAt(2)
-    list.elementAtOrElse(10) { 0 }
-    list.elementAtOrNull(10)
-    list.indexOf(3)
-    list.indexOfFirst { it % 2 == 0 }
-    list.indexOfLast { it % 2 == 0 }
-    list.last { it % 2 == 0 }
-    list.lastOrNull { it % 2 == 0 }
-    list.first { it % 2 == 0 }
-    list.firstOrNull { it % 2 == 0 }
-    list.find { it % 2 == 0 }
-    list.findLast { it % 2 == 0 }
-    list.count { it % 2 == 0 }
-    list.contains(3)
-    list.containsAll(listOf(1, 2))
-    list.isEmpty()
-    list.isNotEmpty()
-    list.none()
-    list.any()
-    list.all { it > 0 }
-    list.sum()
-    list.sumOf { it * 2 }
-    list.sumOf { it.toDouble() }
-    list.minOrNull()
-    list.maxOrNull()
-    list.minOf { it * 2 }
-    list.maxOf { it * 2 }
-    list.minWith(compareBy { it % 2 })
-    list.maxWith(compareBy { it % 2 })
-    list.sorted()
-    list.sortedDescending()
-    list.sortedBy { it % 2 }
-    list.sortedByDescending { it % 2 }
-    list.sortedWith(compareBy { it % 2 })
-    list.reversed()
-    list.shuffled()
-    list.distinct()
-    list.distinctBy { it % 2 }
-    list.distinctBy { it % 2 }
-    list.distinctBy { it % 2 }
-    list.distinctBy { it % 2 }
+    val difference: Set<Int> = listA difference listB
+    println(difference)
+    // [1, 2, 6, 7]
+
+//    setOf(1, 2, 3).partition(setOf(3, 4, 5))
+//    setOf(1, 2, 3).scan() partition(setOf(3, 4, 5))
 }
+
+infix fun <T> Iterable<T>.difference(other: Iterable<T>): Set<T> {
+    val leftOnly = this subtract other.toSet()
+    val rightOnly = other subtract this.toSet()
+    return leftOnly union rightOnly
+}
+
+fun utilities() {
+    val list = listOf(5, 9, 23, 14, 5, 14, 9, 0, 1, -1)
+
+    list.distinct()
+        .also {
+            println(it)  // [5, 9, 23, 14, 0, 1, -1]
+        }
+        .sorted()
+        .also {
+            println(it) // [-1, 0, 1, 5, 9, 14, 23]
+        }
+        .reversed()
+        .also {
+            println(it) // [23, 14, 9, 5, 1, 0, -1]
+        }
+        .shuffled()
+        .also {
+            println(it) // [14, 23, 1, -1, 5, 0, 9]
+        }
+        .sortedDescending()
+        .also {
+            println(it) // [23, 14, 9, 5, 1, 0, -1]
+        }
+
+    println(list.random())
+    // 14
+
+    println(list.average())
+    // 7.9
+
+    println(list.minOf { -it })
+    // -23
+
+    println(list.maxOf { -it })
+    // -1
+}
+
 
 fun main() {
     slice()
@@ -280,5 +289,6 @@ fun main() {
     zip()
     reduce()
     fold()
-    other()
+    operations()
+    utilities()
 }

@@ -27,4 +27,6 @@ fun main() {
 //    Delegates.observable()
 
 //    repeat(5) { println("Hello") }
+
+    // runCatching {}
 }
