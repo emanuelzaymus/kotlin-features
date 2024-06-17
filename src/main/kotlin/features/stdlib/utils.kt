@@ -115,14 +115,13 @@ fun main() {
     observable()
     veto()
 
-
-    // runCatching {}
+//    runCatching { computeValue() }
 
 //    @JvmField
 //    @JvmStatic
-//        @JvmOverloads
-//        @JvmName
-//        @Throws
+//    @JvmOverloads
+//    @JvmName
+//    @Throws
 }
 
 fun computeValue(): Int? {
