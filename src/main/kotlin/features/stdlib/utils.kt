@@ -1,5 +1,6 @@
 package features.stdlib
 
+import kotlin.properties.Delegates
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.measureTime
 
@@ -18,7 +19,7 @@ fun require() {
 
 
     if (value == null) {
-        throw IllegalArgumentException("A cannot be less than B")
+        throw IllegalArgumentException("String cannot be null")
     }
 
     value ?: throw IllegalArgumentException("String cannot be null")
@@ -49,33 +50,71 @@ fun check() {
     val value = computeValue() ?: throw IllegalStateException("Computed value cannot be null")
     println(value)
 
-    computeValue() ?: error("This is an error message")
+    computeValue() ?: error("Computed value cannot be null")
 }
 
+
+fun repeat() {
+    for (i in 1..5) {
+        print("Hello ")
+    }
+    // Hello Hello Hello Hello Hello
+
+    repeat(5) {
+        print("Hello ")
+    }
+    // Hello Hello Hello Hello Hello
+}
+
+var observableString: String by Delegates.observable("Initial value") { property, oldValue, newValue ->
+    println("Property ${property.name} changed from '$oldValue' to '$newValue'")
+}
+
+fun observable() {
+    println(observableString)
+    // Initial value
+
+    observableString = "New value"
+    // Property observableString changed from 'Initial value' to 'New value'
+
+    println(observableString)
+    // New value
+}
+
+var vetoValue: Int by Delegates.vetoable(0) { property, oldValue, newValue ->
+    if (newValue > oldValue) {
+        println("Property ${property.name} CAN be changed from $oldValue to $newValue")
+        true
+    } else {
+        println("Property ${property.name} CANNOT be changed from $oldValue to $newValue")
+        false
+    }
+}
+
+fun veto() {
+    println(vetoValue)
+    // 0
+
+    vetoValue = 10
+    // Property vetoValue CAN be changed from 0 to 10
+
+    println(vetoValue)
+    // 10
+
+    vetoValue = 5
+    // Property vetoValue CANNOT be changed from 10 to 5
+
+    println(vetoValue)
+    // 10
+}
 
 fun main() {
     require()
     check()
+    repeat()
+    observable()
+    veto()
 
-    // ---------
-
-    // example of some interesting kotlin stdlib functions
-
-//    Objects.requireNonNullElseGet("string") { "default" }
-
-
-//    "asdf".
-
-
-//    check(true) { "" }
-//    checkNotNull("string") {}
-//    require(true) { "" }
-//    requireNotNull("string") {}
-//    error("This is an error message")
-//    Delegates.vetoable(0)
-//    Delegates.observable()
-
-//    repeat(5) { println("Hello") }
 
     // runCatching {}
 
