@@ -143,8 +143,14 @@ fun zip() {
     println(zipped)
     // [(1, one), (2, two), (3, three)]
 
-    val zipWithNext = list.zipWithNext()
-    println(zipWithNext)
+    val (ints, strings) = zipped.unzip()
+    println(ints)
+    // [1, 2, 3]
+    println(strings)
+    // [one, two, three]
+
+    val zippedWithNext = list.zipWithNext()
+    println(zippedWithNext)
     // [(1, 2), (2, 3), (3, 4), (4, 5)]
 }
 
