@@ -1,5 +1,7 @@
 package features.stdlib
 
+import java.io.FileReader
+import java.io.FileWriter
 import kotlin.properties.Delegates
 import kotlin.time.Duration.Companion.seconds
 import kotlin.time.measureTime
@@ -66,6 +68,19 @@ fun repeat() {
     // Hello Hello Hello Hello Hello
 }
 
+fun use() {
+    FileWriter("output.txt").use {
+        it.write("Hello, world!")
+    }
+
+    val text = FileReader("output.txt").use {
+        it.readText()
+    }
+
+    println(text)
+    // Hello, world!
+}
+
 var observableString: String by Delegates.observable("Initial value") { property, oldValue, newValue ->
     println("Property ${property.name} changed from '$oldValue' to '$newValue'")
 }
@@ -112,6 +127,7 @@ fun main() {
     require()
     check()
     repeat()
+    use()
     observable()
     veto()
 
