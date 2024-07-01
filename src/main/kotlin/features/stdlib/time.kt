@@ -1,11 +1,13 @@
 package features.stdlib
 
+import kotlin.random.Random
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.days
 import kotlin.time.Duration.Companion.hours
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.Duration.Companion.nanoseconds
 import kotlin.time.Duration.Companion.seconds
+import kotlin.time.TimeSource.Monotonic.markNow
 import kotlin.time.measureTime
 import kotlin.time.measureTimedValue
 
@@ -72,6 +74,23 @@ fun measureTimedValue() {
     // The answer is 42. Computation took 1.005434167s
 }
 
+fun markNowFun() {
+    val timeMarks =
+        List(5) {
+            Thread.sleep(Random.nextLong(500, 1500))
+            markNow()
+        }
+
+    timeMarks.zipWithNext { mark1, mark2 ->
+        val duration: Duration = mark2 - mark1
+        println(duration)
+    }
+    // 674.078959ms
+    // 1.013249791s
+    // 689.836459ms
+    // 1.164045583s
+}
+
 fun toComponents() {
     val duration = 2.days + 10.hours + 4.5.minutes - (50.seconds / 2) - 601.88.nanoseconds
 
@@ -86,6 +105,7 @@ fun main() {
     measureTime()
     measureTimeInWhole()
     measureTimedValue()
+    markNowFun()
     toComponents()
 }
 
