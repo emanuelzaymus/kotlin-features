@@ -8,7 +8,7 @@ fun listOfFunction() {
 }
 
 fun listFunction() {
-    val list: List<Int> = List(5) { it + 1 }
+    val list: List<Int> = List(5) { i -> i + 1 }
 
     println(list)
     // [1, 2, 3, 4, 5]
@@ -29,7 +29,7 @@ fun mutableListOfFunction() {
 }
 
 fun buildListFunction() {
-    val list4 = buildList {
+    val list: List<Int> = buildList {
         add(1)
         for (i in 2..4) {
             add(i)
@@ -37,8 +37,14 @@ fun buildListFunction() {
         remove(3)
         add(5)
     }
-    println(list4)
+
+    println(list)
     // [1, 2, 4, 5]
+
+    try {
+        (list as MutableList).add(6)
+    } catch (_: UnsupportedOperationException) {
+    }
 }
 
 fun otherBuildFunctions() {

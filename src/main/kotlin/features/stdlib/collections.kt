@@ -40,12 +40,14 @@ fun groupBy() {
     println(map)
     // {6=[Kotlin, Groovy], 4=[Java], 5=[Scala]}
 
+
     val counts = list.groupingBy { it.length }.eachCount()
     println(counts)
     // {6=2, 4=1, 5=1}
 
-    val aggregate = list
-        .groupingBy { it.length }
+
+    val aggregate: Map<Int, String> = list
+        .groupingBy { it.length } // Grouping {6=[Kotlin, Groovy], 4=[Java], 5=[Scala]}
         .aggregate { key: Int, accumulator: String?, element: String, first: Boolean ->
             val acc =
                 if (first) "With length $key is "
@@ -121,33 +123,37 @@ fun joinToString() {
     // <1 * 3 = 3; 2 * 3 = 6; 3 * 3 = 9; ...>
 }
 
-fun joinTo(buffer: Appendable = StringBuilder("Calculation... ")) {
+fun joinTo() {
     val list = listOf(1, 2, 3, 4, 5)
+
+    val buffer: Appendable = StringBuilder("Calculation... ")
 
     list.joinTo(
         buffer,
         separator = " + ",
         prefix = "Sum: ",
-        postfix = " is ${list.sum()}",
+        postfix = " = ${list.sum()}",
     )
 
     println(buffer)
-    // Calculation... Sum: 1 + 2 + 3 + 4 + 5 is 15
+    // Calculation... Sum: 1 + 2 + 3 + 4 + 5 = 15
 }
 
 fun zip() {
     val list = listOf(1, 2, 3, 4, 5)
     val names = listOf("one", "two", "three")
 
-    val zipped: List<Pair<Int, String>> = list.zip(names)
+    val zipped: List<Pair<Int, String>> = list zip names
     println(zipped)
     // [(1, one), (2, two), (3, three)]
+
 
     val (ints, strings) = zipped.unzip()
     println(ints)
     // [1, 2, 3]
     println(strings)
     // [one, two, three]
+
 
     val zippedWithNext = list.zipWithNext()
     println(zippedWithNext)
@@ -161,17 +167,20 @@ fun reduce() {
     println(product)
     // 120
 
+
     val product2 = list.reduce(Int::times)
-    println(product == product2)
-    // true
+    println(product2)
+    // 120
+
 
     val runningReduce: List<Int> = list.runningReduce(Int::times)
     println(runningReduce)
     // [1, 2, 6, 24, 120]
 
+
     val emptyList = listOf<Int>()
     try {
-        emptyList.reduce(Int::times)
+        emptyList.reduce(Int::times) // reduceOrNull
     } catch (_: UnsupportedOperationException) {
     } // UnsupportedOperationException: Empty collection can't be reduced.
 }
@@ -183,9 +192,11 @@ fun fold() {
     println(foldInt)
     // 1
 
+
     val foldDouble: Double = list.fold(1.0, Double::times)
     println(foldDouble)
     // 1.0
+
 
     val list2 = listOf("5", "8", "3", "9", "4")
 
@@ -196,13 +207,14 @@ fun fold() {
     println(sumOfPowers)
     // 7681.0
 
+
     val sumOfPowers2 = list2.asSequence()
         .map { it.toDouble() }
         .mapIndexed { index, num -> num.pow(index + 1) }
         .sum()
 
-    println(sumOfPowers == sumOfPowers2)
-    // true
+    println(sumOfPowers2)
+    // 7681.0
 }
 
 fun scan() {
@@ -260,6 +272,7 @@ infix fun <T> Iterable<T>.difference(other: Iterable<T>): Set<T> {
     return leftOnly union rightOnly
 }
 
+//
 fun utilities() {
     val list = listOf(5, 9, 23, 14, 5, 14, 9, 0, 1, -1)
 
