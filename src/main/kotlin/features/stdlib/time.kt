@@ -57,7 +57,7 @@ fun measureTimeInWhole() {
 }
 
 fun measureTimedValue() {
-    var answer: Int
+    val answer: Int
 
     val duration = measureTime {
         answer = computeAnswer()

@@ -10,6 +10,7 @@ fun slice() {
     println(slice)
     // [b, c, d]
 
+
     val indices = listOf(4, 0, 2)
     val slice2: List<Char> = list.slice(indices)
     println(slice2)
@@ -227,7 +228,7 @@ fun scan() {
 }
 
 fun operations() {
-    val listA = listOf(3, 1, 2, 3, 4, 5)
+    val listA = listOf(1, 2, 3, 4, 5)
     val listB = listOf(3, 4, 5, 6, 7)
 
     val aPlusB: List<Int> = listA + listB
