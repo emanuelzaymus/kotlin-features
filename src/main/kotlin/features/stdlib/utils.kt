@@ -56,7 +56,6 @@ fun check() {
     computeValue() ?: error("Computed value cannot be null")
 }
 
-
 fun repeat() {
     for (i in 1..5) {
         print("Hello ")
