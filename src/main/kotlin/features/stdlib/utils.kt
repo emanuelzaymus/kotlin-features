@@ -49,6 +49,7 @@ fun check() {
     // java.lang.IllegalStateException: Computed value cannot be null
     println(nonNullValue)
 
+
     val value = computeValue() ?: throw IllegalStateException("Computed value cannot be null")
     println(value)
 

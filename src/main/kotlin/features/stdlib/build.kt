@@ -1,5 +1,6 @@
 package features.stdlib
 
+
 fun listOfFunction() {
     val list: List<Int> = listOf(1, 2, 3, 4, 5)
 

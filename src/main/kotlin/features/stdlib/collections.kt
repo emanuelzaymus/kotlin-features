@@ -2,6 +2,7 @@ package features.stdlib
 
 import kotlin.math.pow
 
+
 fun slice() {
     val list = listOf('a', 'b', 'c', 'd', 'e')
 
