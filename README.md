@@ -1,6 +1,8 @@
 # kotlin-features
 
-Showcase of uncommon usage of typical Kotlin features.
+### _Showcase of uncommon usage of typical Kotlin features_
+
+___
 
 ### LocalDate / LocalDateTime
 
@@ -21,3 +23,42 @@ Showcase of uncommon usage of typical Kotlin features.
 ### Enhanced Extension Properties
 
 - Extensions properties using WeakHashMap for storing data
+
+### _Showcase of interesting functions from Kotlin Standard Library_
+
+___
+
+### Build functions
+
+- `buildList`
+- `buildSet`
+- `buildMap`
+- `buildString`
+
+### Collection functions
+
+- `slice`
+- `associate`, `associateBy`, `associateWith`
+- `groupBy`, `groupingBy`
+- `chunked`
+- `windowed`
+- `partition`
+- `joinToString`, `joinTo`
+- `zip`, `unzip`, `zipWithNext`
+- `reduce`, `runningReduce`
+- `fold`, `scan`
+- `subtract`, `union`, `intersect`
+
+### Measuring time
+
+- `measureTime { }`
+- `measureTimedValue { }`
+- `markNow()`
+
+### Utilities
+
+- `require`, `requireNotNull`
+- `check`, `checkNotNull`
+- `error`
+- `repeat`, `use`
+- `Delegates.observable`, `Delegates.vetoable`

@@ -130,14 +130,6 @@ fun main() {
     use()
     observable()
     veto()
-
-//    runCatching { computeValue() }
-
-//    @JvmField
-//    @JvmStatic
-//    @JvmOverloads
-//    @JvmName
-//    @Throws
 }
 
 fun computeValue(): Int? {
